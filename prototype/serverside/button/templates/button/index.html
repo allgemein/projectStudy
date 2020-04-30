@@ -1,0 +1,5 @@
+<form action="{% url 'index' %}" method="post">
+  {% csrf_token %}
+  <input type="submit" name="button_1" value="100ms"> 
+  <input type="submit" name="button_2" value="500ms">
+</form>
