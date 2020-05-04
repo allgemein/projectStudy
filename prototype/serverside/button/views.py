@@ -1,27 +1,28 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import delaytime
+from .models import status
 from django.http import HttpResponse
 
 
 def index(request):
-    sec=delaytime.objects.all()
     template='button/index.html'
-    context={
-            'sec':sec,
-            }
     if request.method == 'POST':
         if 'button_1' in request.POST:
-            delaytime.objects.all().delete()
-            t=delaytime(delaysec=100)
+            status.objects.all().delete()
+            t=status(place=1)
             t.save()
         elif 'button_2' in request.POST:
-            delaytime.objects.all().delete()
-            t=delaytime(delaysec=500)
+            status.objects.all().delete()
+            t=status(place=2)
             t.save()
-    return render(request,template,context)
+        elif 'button_3' in request.POST:
+            status.objects.all().delete()
+            t=status(place=3)
+            t.save()
+
+    return render(request,template)
 
 def data(request):
-    sec=delaytime.objects.get().delaysec
-    return HttpResponse(sec)
+    res=status.objects.get().place
+    return HttpResponse(res)
