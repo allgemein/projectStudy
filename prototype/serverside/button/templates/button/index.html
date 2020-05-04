@@ -1,5 +1,17 @@
+<html>
+<head>
+
+<meta name="viewport"
+   content="width=320,
+      height=480,
+      initial-scale=1.0,
+      minimum-scale=1.0,
+      maximum-scale=2.0,
+      user-scalable=yes" />
+
+</head>
 <form action="{% url 'index' %}" method="post">
   {% csrf_token %}
-  <input type="submit" name="button_1" value="100ms"> 
-  <input type="submit" name="button_2" value="500ms">
+  <input type="submit" name="button_2" value="ON"> 
+  <input type="submit" name="button_1" value="OFF">
 </form>
