@@ -1,18 +1,39 @@
+{% load static %}
 <html>
-<head>
+	<head>
+		<title>ロボット操作アプリケーション</title>
+		<link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/button.css' %}">
+	</head>
+	<body>
+		<font style="font-family:'Nico Moji'">
+			<div class="page-header">
+				<h1>ロボットそうさアプリケーション</h1>
+			</div>
+			<form action="{% url 'index' %}" method="post">
+				{% csrf_token %}
 
-<meta name="viewport"
-   content="width=320,
-      height=480,
-      initial-scale=1.0,
-      minimum-scale=1.0,
-      maximum-scale=2.0,
-      user-scalable=yes" />
+				{% ifequal status.direction "front"%}
+				<input type="submit" id="front" name="button_1" value="まえ">
+				{% endifequal %}
 
-</head>
-<form action="{% url 'index' %}" method="post">
-  {% csrf_token %}
-  <input type="submit" name="button_1" value="正転"> 
-  <input type="submit" name="button_2" value="逆転">
-  <input type="submit" name="button_3" value="停止"> 
-</form>
+				{% ifequal status.direction "back" %}
+				<input type="submit" id="back" name="button_1" value="うしろ">
+				{% endifequal %}
+
+				{% ifequal status.power 1 %}
+				<input type="submit" id="on" name="button_2" value="ON">
+				{% endifequal %}
+
+				{% ifequal status.power 0 %}
+				<input type="submit" id="off" name="button_2" value="OFF">
+				{% endifequal %}
+
+				</div>
+			</form>
+		</font>
+	</body>
+</html>

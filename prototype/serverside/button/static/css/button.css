@@ -1,0 +1,60 @@
+.page-header {
+    color: 303029;
+    padding-bottom: 10px;
+	border: none;
+    margin: 0px 0 20px;
+    padding-top: 10px;
+    background-color: rgb(100,230,200);
+    box-shadow: 0px 1px 3px 2px rgba(0,0,0,0.4);
+	padding-top: 3vh;
+	padding-bottom: 4vh;
+}
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 5rem;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #faffea;
+}
+h1, .h1 {
+	font-size: 7vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+input[type="submit" i] {
+    text-align: center;
+    cursor: default;
+    color: buttontext;
+    box-sizing: border-box;
+    padding: 1px 7px 2px;
+	width: 45vw;
+	height: 45vw;
+    border-width: 0.5vw;
+    border-style: solid;
+	border-radius: 0%;
+    border-color: rgb(0,0,0) rgb(0,0,0) rgb(0,0,0);
+    border-image: initial;
+	position: fixed;
+	font-size: 10vw;
+}
+
+#front {
+    background-color: #ffb963;
+	left: 3vw;
+    box-shadow: 0px 1px 3px 2px rgba(0,0,0,0.4);
+}
+#back {
+    background-color: #357ebd;
+	left: 3vw;
+    box-shadow: inset 0px 1px 3px 2px rgba(0,0,0,0.4);
+}
+#on {
+    background-color: #d9534f;
+    box-shadow: inset 0px 1px 3px 2px rgba(0,0,0,0.4);
+	right: 3vw;
+}
+#off {
+    background-color: gray;
+	right: 3vw;
+    box-shadow: 0px 1px 3px 2px rgba(0,0,0,0.4);
+}
