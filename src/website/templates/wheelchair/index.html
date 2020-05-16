@@ -1,0 +1,13 @@
+<ul>
+{% for task in task_list %}
+    <li>
+		<ul>
+			<li>time:{{ task.time }}</li>
+			<li>user:{{ task.user }}</li>
+			<li>station:{{ task.station }}</li>
+			<li>car:{{ task.car }}</li>
+			<li>door:{{ task.door }}</li>
+		</ul>
+	</li>
+{% endfor %}
+</ul>
