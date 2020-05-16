@@ -7,5 +7,6 @@ class Task(models.Model):
     door = models.IntegerField(default=-1)
     time = models.TimeField(auto_now=False,auto_now_add=True)    
     user = models.CharField(max_length=50)
+    car = models.IntegerField(default=-1)
     def __str__(self):
         return self.station

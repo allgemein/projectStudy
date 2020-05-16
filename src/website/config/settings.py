@@ -27,7 +27,6 @@ ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-        'api.apps.ApiConfig',
         'wheelchair.apps.WheelchairConfig',
         'rest_framework',
         'django.contrib.admin',
@@ -54,7 +53,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [],
+            'DIRS': [os.path.join(BASE_DIR, 'templates')],
             'APP_DIRS': True,
             'OPTIONS': {
                 'context_processors': [
