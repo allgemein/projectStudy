@@ -15,7 +15,7 @@ class TaskAPIView(generics.ListAPIView):
 class SignUp(CreateView):
     form_class = SignUpForm
     template_name = "wheelchair/signup.html" 
-    success_url = reverse_lazy('api/')
+    success_url = reverse_lazy('/api')
 
     def form_valid(self, form):
         user = form.save() # formの情報を保存
