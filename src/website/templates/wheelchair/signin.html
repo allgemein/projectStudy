@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+	</head>
+	<body>
+		{% block content %}
+		<main>
+			<form method="post" action="{% url 'signin' %}">
+				{% csrf_token %}
+				<input type="text" name="username" />
+				<br>
+				<input type="password" name="password" />
+				<br>
+				<input type="submit" value="login" />
+			</form>
+			{% endblock %}
+	</body>
+</html>
+

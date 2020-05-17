@@ -3,9 +3,9 @@ from rest_framework import generics
 from wheelchair.models import Task
 from wheelchair.forms import SignUpForm, TaskForm
 from .serializers import TaskSerializer
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 
@@ -23,6 +23,19 @@ class SignUp(CreateView):
         login(self.request, user) # 認証
         self.object = user 
         return HttpResponseRedirect(self.get_success_url()) # リダイレクト
+
+def SignIn(request):
+    try:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            return render(request, 'wheelchair/signin.html')
+    except KeyError:
+        return render(request, 'wheelchair/signin.html')
 
 class TaskView(CreateView):
     form_class = TaskForm
