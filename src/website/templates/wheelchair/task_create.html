@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-	<head>
-	</head>
-	<body>
-		{% block content %}
-		<main>
-			<form method="post">
-				{% csrf_token %}
-				<table>
-					<tr>
-						<td>{{ form.station.label_tag }}</td>
-						<td>{{ form.station }}</td>
-					</tr>
-					<tr>
-						<td>{{ form.door.label_tag }}</td>
-						<td>{{ form.door }}</td>
-					</tr>
-					<tr>
-						<td>{{ form.car.label_tag }}</td>
-						<td>{{ form.car }}</td>
-					</tr>
-				</table>
-				<input type="submit" value="add task" />
-			</form>
-			{% endblock %}
-	</body>
-</html>
+{% extends 'wheelchair/base.html' %}
+{% block content %}
+<main>
+	<form method="post">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>{{ form.station.label_tag }}</td>
+				<td>{{ form.station }}</td>
+			</tr>
+			<tr>
+				<td>{{ form.door.label_tag }}</td>
+				<td>{{ form.door }}</td>
+			</tr>
+			<tr>
+				<td>{{ form.car.label_tag }}</td>
+				<td>{{ form.car }}</td>
+			</tr>
+		</table>
+		<input type="submit" value="add task" />
+	</form>
+</main>
+{% endblock %}

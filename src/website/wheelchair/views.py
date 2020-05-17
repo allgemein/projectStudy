@@ -17,7 +17,7 @@ class TaskAPIView(generics.ListAPIView):
 class SignUp(CreateView):
     form_class = SignUpForm
     template_name = "wheelchair/signup.html" 
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy('userpage')
 
     def form_valid(self, form):
         user = form.save() # formの情報を保存
@@ -32,7 +32,7 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('userpage'))
         else:
             return render(request, 'wheelchair/signin.html')
     except KeyError:
@@ -41,13 +41,12 @@ def signin(request):
 class TaskView(CreateView):
     form_class = TaskForm
     template_name = "wheelchair/task_create.html"
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy('userpage')
 
     def get(self, request, *args, **kwargs):
-        try:
-            user = self.request.user
-            return super(TaskView, self).dispatch(request, *args, **kwargs)
-        except:
+        if request.user.is_authenticated:
+            return super(TaskView, self).get(request, *args, **kwargs)
+        else:
             return HttpResponseRedirect(reverse('signin'))
     def form_valid(self,form):
         data = form.save(commit=False)
@@ -62,11 +61,16 @@ def signout(request):
 def index(request):
     return render(request, 'wheelchair/index.html')
 
+def root(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('userpage'))
+    else:
+        return HttpResponseRedirect(reverse('index'))
+
 def userpage(request):
-    try:
-        user=request.user
-        task_list = Task.objects.filter(user=user)
-        context={'task_list' : task_list}
-        return render(request, 'wheelchair/userpage.html', context)
-    except:
+    if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('signin'))
+    user=request.user
+    task_list = Task.objects.filter(user=user)
+    context={'task_list' : task_list}
+    return render(request, 'wheelchair/userpage.html', context)
