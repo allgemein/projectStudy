@@ -1,3 +1,17 @@
 {% extends 'wheelchair/base.html' %}
 {% block content %}
+{% load static %}
+<br>
+<div class="container">
+	<div class="card">
+		<div class="card-body">スロープを自動的に展開します．</div>
+		<img class="card-img-bottom" src="{% static "image/仮車体 v1.png" %}">
+	</div>
+	<br>
+	{% if request.user.is_authenticated %}
+	<button onclick="location.href='{% url 'task_create' %}'" class="btn btn-info btn-block">Taskを追加しますか？</button>
+	{% else %}
+	<button onclick="location.href='{% url 'signup' %}'" class="btn btn-success btn-block">signupしましょう!</button>
+	{% endif %}
+</div>
 {% endblock %}

@@ -1,30 +1,30 @@
 {% extends 'wheelchair/base.html' %}
 {% block content %}
 <main>
-	<h1>{{ user.username }}</h1>
-	{{ user.email }}
-	<br>
-	<a href="{% url 'task_create' %}">add task</a>
-	<table>
-		<thead>
-			<tr>
-				<th>time</th>
-				<th>station</th>
-				<th>car</th>
-				<th>door</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for task in task_list %}
-			<tr>
-				<td>{{ task.time }}</td>
-				<td>{{ task.station }}</td>
-				<td>{{ task.car }}</td>
-				<td>{{ task.door }}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+	<div class="container">
+		<h1>{{ user.username }}</h1>
+		<br>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>time</th>
+					<th>station</th>
+					<th>car</th>
+					<th>door</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for task in task_list %}
+				<tr>
+					<td>{{ task.time }}</td>
+					<td>{{ task.station }}</td>
+					<td>{{ task.car }}</td>
+					<td>{{ task.door }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<button onclick="location.href='{% url 'task_create' %}'" class="btn btn-primary">add task</button>
+	</div>
 </main>
-<a href="{% url 'index' %}">topへ</a>
 {% endblock %}

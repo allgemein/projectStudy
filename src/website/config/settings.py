@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 INSTALLED_APPS = [
         'wheelchair.apps.WheelchairConfig',
         'rest_framework',
+        'bootstrap4',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
