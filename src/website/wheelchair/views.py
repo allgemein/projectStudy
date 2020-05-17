@@ -3,10 +3,11 @@ from rest_framework import generics
 from wheelchair.models import Task
 from wheelchair.forms import SignUpForm, TaskForm
 from .serializers import TaskSerializer
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 from django.shortcuts import render
 
 class TaskAPIView(generics.ListAPIView):
@@ -24,7 +25,7 @@ class SignUp(CreateView):
         self.object = user 
         return HttpResponseRedirect(self.get_success_url()) # リダイレクト
 
-def SignIn(request):
+def signin(request):
     try:
         username = request.POST['username']
         password = request.POST['password']
@@ -42,13 +43,30 @@ class TaskView(CreateView):
     template_name = "wheelchair/task_create.html"
     success_url = reverse_lazy("index")
 
+    def get(self, request, *args, **kwargs):
+        try:
+            user = self.request.user
+            return super(TaskView, self).dispatch(request, *args, **kwargs)
+        except:
+            return HttpResponseRedirect(reverse('signin'))
     def form_valid(self,form):
         data = form.save(commit=False)
         data.user = self.request.user
         data.save()
         return super().form_valid(form)
 
+def signout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
 def index(request):
-    task_list = Task.objects.order_by('time')[:10]
-    context={'task_list' : task_list}
-    return render(request, 'wheelchair/index.html', context)
+    return render(request, 'wheelchair/index.html')
+
+def userpage(request):
+    try:
+        user=request.user
+        task_list = Task.objects.filter(user=user)
+        context={'task_list' : task_list}
+        return render(request, 'wheelchair/userpage.html', context)
+    except:
+        return HttpResponseRedirect(reverse('signin'))
