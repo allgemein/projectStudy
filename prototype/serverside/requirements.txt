@@ -2,7 +2,7 @@ asgiref==3.2.7
 chardet==3.0.4
 django-toolbelt==0.0.1
 dj-database-url==0.5.0
-Django==3.0.5
+Django==3.0.7
 django-filter==2.2.0
 djangorestframework==3.11.0
 greenlet==0.4.15
